@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { MdPermMedia, MdLabel, MdEmojiEmotions } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Share = () => {
+  const { user } = useContext(AuthContext).user || {};
   return (
     <div className="w-full h-[170px] rounded-lg shadow-xl border">
       {/* Share Wrapper  */}
@@ -11,9 +13,12 @@ const Share = () => {
         {/* Share top  */}
         <div className="flex items-center">
           {/* Image  */}
-          <Link to="/profile">
+          <Link to={user && `/profile/${user.username}`}>
             <img
-              src="https://scontent.fceb1-3.fna.fbcdn.net/v/t39.30808-6/318241363_947108700007554_3906364440796603928_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEF49m17PZPBv82tYtTyKJtnolq__uNpsmeiWr_-42myfdYPIGQJcKAVVw_O8rRUIe1J7p0un7lpA8x7DAcA9af&_nc_ohc=slIE5d0676AAX8nOjpq&_nc_ht=scontent.fceb1-3.fna&oh=00_AfAHJo8Fpj9Xl4NJdszGQdmq80qMJRAjqaCojIiAbms6xQ&oe=659E87B2"
+              src={
+                (user && user.profilePicture) ||
+                "https://scontent.fceb1-3.fna.fbcdn.net/v/t39.30808-6/318241363_947108700007554_3906364440796603928_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEF49m17PZPBv82tYtTyKJtnolq__uNpsmeiWr_-42myfdYPIGQJcKAVVw_O8rRUIe1J7p0un7lpA8x7DAcA9af&_nc_ohc=slIE5d0676AAX8nOjpq&_nc_ht=scontent.fceb1-3.fna&oh=00_AfAHJo8Fpj9Xl4NJdszGQdmq80qMJRAjqaCojIiAbms6xQ&oe=659E87B2"
+              }
               alt=""
               className="w-[50px] h-[50px] rounded-full object-cover mr-3"
             />

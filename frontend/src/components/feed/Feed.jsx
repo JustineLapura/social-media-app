@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
 import axios from "axios";
-
+import { AuthContext } from "../../context/AuthContext";
 
 const Feed = ({ username }) => {
   const [posts, setPosts] = useState([]);
-  // console.log("posts fr Feed: ", posts); 
+  const { user } = useContext(AuthContext).user || {};
+  // console.log("posts fr Feed: ", posts);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
         ? await axios.get("http://localhost:4000/api/posts/profile/" + username)
         : await axios.get(
-            "http://localhost:4000/api/posts/timeline/65795b28cf5e81e469c8ca13"
+            `http://localhost:4000/api/posts/timeline/${user._id}`
           );
       setPosts(res.data);
     };
 
     fetchPosts();
-  }, [username]);
+  }, [username, user._id]);
   return (
     <div className="h-[92vh] p-5">
       <Share />

@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Topbar = () => {
   const { user } = useContext(AuthContext).user || {};
-  console.log("User: ", user);
+  // console.log("User: ", user);
 
   const { logout } = useLogout();
 
@@ -78,7 +78,7 @@ const Topbar = () => {
             </span>
           </div>
         </div>
-        <Link to="/profile">
+        <Link to={user && `/profile/${user.username}`}>
           <img
             src={
               (user && user.profilePicture) ||

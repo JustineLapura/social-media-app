@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Profile = () => {
   const [user, setUser] = useState({});
   const { username } = useParams();
+
   // console.log("Params: ", { username });
   // console.log("user fr Profile: ", user);
 
@@ -61,7 +63,7 @@ const Profile = () => {
           </div>
           {/* bottom  */}
           <div className="flex">
-            <Feed username="justine" />
+            <Feed username={username} />
             <Rightbar user={user} />
           </div>
         </div>

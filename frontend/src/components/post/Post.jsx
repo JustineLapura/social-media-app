@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdMoreVert } from "react-icons/md";
 import { IoHeartCircleSharp } from "react-icons/io5";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Post = ({ post }) => {
   const [likeData, setLikeData] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+
+  // const { user: currentUser } = useContext(AuthContext).user || {};
+  // console.log("User fr Post: ", currentUser);
+  
   // console.log("user fr Post:", user);
   // console.log("post fr Post: ", post);
   // const realUser = user.filter((u) => u._id === post.userId);
